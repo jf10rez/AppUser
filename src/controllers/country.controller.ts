@@ -1,21 +1,12 @@
 import {
-  Count,
-  CountSchema,
   Filter,
   FilterExcludingWhere,
-  repository,
-  Where,
+  repository
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {CountryTb} from '../models';
 import {CountryTbRepository} from '../repositories';
@@ -47,17 +38,6 @@ export class CountryController {
     return this.countryTbRepository.create(countryTb);
   }
 
-  @get('/country/count')
-  @response(200, {
-    description: 'CountryTb model count',
-    content: {'application/json': {schema: CountSchema}},
-  })
-  async count(
-    @param.where(CountryTb) where?: Where<CountryTb>,
-  ): Promise<Count> {
-    return this.countryTbRepository.count(where);
-  }
-
   @get('/country')
   @response(200, {
     description: 'Array of CountryTb model instances',
@@ -76,25 +56,6 @@ export class CountryController {
     return this.countryTbRepository.find(filter);
   }
 
-  @patch('/country')
-  @response(200, {
-    description: 'CountryTb PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
-  })
-  async updateAll(
-    @requestBody({
-      content: {
-        'application/json': {
-          schema: getModelSchemaRef(CountryTb, {partial: true}),
-        },
-      },
-    })
-    countryTb: CountryTb,
-    @param.where(CountryTb) where?: Where<CountryTb>,
-  ): Promise<Count> {
-    return this.countryTbRepository.updateAll(countryTb, where);
-  }
-
   @get('/country/{id}')
   @response(200, {
     description: 'CountryTb model instance',
@@ -109,24 +70,6 @@ export class CountryController {
     @param.filter(CountryTb, {exclude: 'where'}) filter?: FilterExcludingWhere<CountryTb>
   ): Promise<CountryTb> {
     return this.countryTbRepository.findById(id, filter);
-  }
-
-  @patch('/country/{id}')
-  @response(204, {
-    description: 'CountryTb PATCH success',
-  })
-  async updateById(
-    @param.path.string('id') id: string,
-    @requestBody({
-      content: {
-        'application/json': {
-          schema: getModelSchemaRef(CountryTb, {partial: true}),
-        },
-      },
-    })
-    countryTb: CountryTb,
-  ): Promise<void> {
-    await this.countryTbRepository.updateById(id, countryTb);
   }
 
   @put('/country/{id}')
