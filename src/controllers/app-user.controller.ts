@@ -1,3 +1,4 @@
+import {intercept} from '@loopback/core';
 import {
   Filter,
   FilterExcludingWhere,
@@ -8,9 +9,11 @@ import {
   getModelSchemaRef, param, post, put, requestBody,
   response
 } from '@loopback/rest';
+import {HashPasswordInterceptor} from '../interceptors';
 import {AppUserTb} from '../models';
 import {AppUserTbRepository} from '../repositories';
 
+@intercept(HashPasswordInterceptor.BINDING_KEY)
 export class AppUserController {
   constructor(
     @repository(AppUserTbRepository)
