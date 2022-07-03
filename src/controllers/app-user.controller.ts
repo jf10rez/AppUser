@@ -9,10 +9,11 @@ import {
   getModelSchemaRef, param, post, put, requestBody,
   response
 } from '@loopback/rest';
-import {HashPasswordInterceptor} from '../interceptors';
+import {EmailValidatorInterceptor, HashPasswordInterceptor} from '../interceptors';
 import {AppUserTb} from '../models';
 import {AppUserTbRepository} from '../repositories';
 
+@intercept(EmailValidatorInterceptor.BINDING_KEY)
 @intercept(HashPasswordInterceptor.BINDING_KEY)
 export class AppUserController {
   constructor(
