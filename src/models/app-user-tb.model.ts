@@ -41,6 +41,8 @@ export class AppUserTb extends Entity {
   @property({
     type: 'string',
     required: true,
+    unique: true,
+    index: {unique: true}
   })
   Username: string;
 
