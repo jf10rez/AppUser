@@ -3,3 +3,4 @@ export * from './type-document.controller';
 export * from './country.controller';
 export * from './app-user.controller';
 export * from './user-document.controller';
+export * from './contact-info.controller';
